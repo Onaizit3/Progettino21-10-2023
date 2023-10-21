@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <title>Tabella AutoFatta</title>
+    <link rel="stylesheet" href="Bottoni.css">
+</head>
+
+<body>
+    <div>
+        <button style="padding: 20px;
+                       margin-top: 30px;
+                       background-color: crimson;
+                       color: wheat; 
+                       font-size: 20px;
+                       " onclick="CreaTabella()">
+            Crea tabella
+        </button>
+    </div>
+    <div style="margin-top: 40px;" id="pulsante"></div>
+
+    <div style="margin-top: 40px;" id="tabella">           
+
+        <table>
+            <tr> <td>Orario</td> <td>Lunedi</td><td>Martedi</td><td>Mercoledi</td><td>Giovedi</td><td>Venerdi</td></tr>
+            <tr> <td>9:00-11:00 </td>  <td id="Dato11"></td>  <td id="Dato12"></td>  <td id="Dato13"></td>  <td id="Dato14"></td>  <td id="Dato15"></td>  </tr>
+            <tr> <td>11:00-13:00</td>  <td id="Dato21"></td>  <td id="Dato22"></td>  <td id="Dato23"></td>  <td id="Dato24"></td>  <td id="Dato25"></td>  </tr>
+            <tr> <td>14:00-16:00</td>  <td id="Dato31"></td>  <td id="Dato32"></td>  <td id="Dato33"></td>  <td id="Dato34"></td>  <td id="Dato35"></td>  </tr>
+            <tr> <td>16:00-18:00</td>  <td id="Dato41"></td>  <td id="Dato42"></td>  <td id="Dato43"></td>  <td id="Dato44"></td>  <td id="Dato45"></td>  </tr>
+            </table>
+
+    </div>
+
+    <script type="text/javascript">
+
+        
+        
+        var Materie = ["Aritmetica","Algebra 1","Fisica 1 con laboratorio","Geometria 1","Analisi1"];
+        var Orari = [   [ "o11","o12","o13" ],
+                        [ "o22","o33","o41" ], 
+                        [ "o11","o22","o45" ], 
+                        [ "o12","o35","o44" ],
+                        [ "o41","o34","o35" ] ]
+
+
+        var materie = [];
+        for (let i = 1; i <= Materie.length; i++) {
+        materie.push(i);
+        }
+        var Clicca = Array.apply(null, Array(Materie.length)).map(Number.prototype.valueOf,0);
+        
+
+        function inserimento(Parola,parola,i) {
+          var k=i;
+          var btn = document.createElement("button");
+          btn.innerHTML = Parola;
+          btn.id=parola;
+          document.getElementById("pulsante").appendChild(btn);
+          btn.onclick = function(){            
+            if(Clicca[k]==0){ 
+                Clicca[k]=1; 
+                q=document.getElementById(materie[k]).classList.add('BottoneCliccato');
+                }
+            else{ 
+                Clicca[k]=0;
+                document.getElementById(materie[k]).classList.remove('BottoneCliccato');               
+                }
+          }; 
+        }
+
+    
+
+
+        for (let i = 0; i < materie.length; i++) {
+            inserimento(Materie[i],materie[i],i);
+        }
+
+        function DistruggiTabella() {
+            for (let i=1; i<5; i++){
+                for(let j=1; j<6; j++){
+                    ducument.getElementById("Dato"+String(i)+String(j)).innerHTML("");
+                }
+            }
+        }
+
+
+        function CreaTabella(){
+
+            for(let i=1; i<5; i++){
+                for(let j=1; j<6; j++){
+                    ciao="Dato"+String(i)+String(j);
+                    document.getElementById(ciao).innerHTML ="";
+                }
+            }
+
+            let lunghezza = Orari[0].length;
+            console.log(lunghezza);
+            console.log(materie.length);
+            for (let i=0 ; i< materie.length; i++) {
+                X=Orari[i];
+                if(Clicca[i]==1){
+                    for(let j=0 ; j<lunghezza; j++){
+                        Y=X[j];
+                        let Dato="Dat"+Y;
+                        document.getElementById(Dato).innerHTML +=( Materie[i]+"<br>");
+                        
+                    }
+                }
+            
+        }
+
+
+        }
+
+
+
+    </script>
+
+</body>
+</html>
